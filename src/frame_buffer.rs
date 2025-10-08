@@ -1,3 +1,5 @@
+#![no_std]
+
 use core::{ mem, slice }
 
 #[derive(Debug, Clone, Copy, PartialEq)]
