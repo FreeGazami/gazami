@@ -59,6 +59,10 @@ pub extern "C" fn _start(bootinfo_addr: *mut c_void) -> ! {
         // 0xbf5ecb98 as *mut RuntimeServices
     };
 
+    let frame_buffer_base: u64 = unsafe{(*bootinfo).frame_buffer_base};
+
+    print_u64(frame_buffer_base);
+
     unsafe {
         ((*runtime_services).reset_system)(ResetType::COLD, Status::SUCCESS, 0, core::ptr::null())
     }
