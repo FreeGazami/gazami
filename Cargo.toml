@@ -5,4 +5,4 @@ edition = "2024"
 
 [dependencies]
 uefi-raw = { version = "0.11.0" }
-uefi_handoff = { git = "https://github.com/tomosnelli/uefi_handoff.git", branch = "master" }
+uefi_handoff = { git = "https://github.com/FreeGazami/uefi_handoff.git", branch = "master" }
