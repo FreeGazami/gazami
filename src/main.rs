@@ -2,6 +2,7 @@
 #![no_main]
 
 mod framebuffer;
+mod font;
 
 use core::arch::asm;
 use core::ffi::c_void;
@@ -18,6 +19,8 @@ use framebuffer::FrameBuffer;
 use framebuffer::Pixel;
 
 use uefi_raw::protocol::console::GraphicsOutputModeInformation;
+
+use font::*;
 
 const SERIAL_PORT: u16 = 0x3F8;
 
@@ -91,25 +94,27 @@ pub extern "C" fn _start(bootinfo_addr: *mut c_void) -> ! {
     //     ((*runtime_services).reset_system)(ResetType::COLD, Status::SUCCESS, 0, core::ptr::null())
     // }
 
-    serial_write_string("base address in dec: ");
-    print_u64(frame_buffer_base);
-    serial_write_string("\n");
-
     let info: GraphicsOutputModeInformation = unsafe{(*bootinfo).info};
-
-    serial_write_string("get framebuffer info-> horizontal:");
-    print_u32(info.horizontal_resolution);
-    serial_write_string(", vertical: ");
-    print_u32(info.vertical_resolution);
-    serial_write_string(", stride: ");
-    print_u32(info.pixels_per_scan_line);
-    serial_write_string("\n");
 
     let mut frame_buffer: FrameBuffer = FrameBuffer::new(frame_buffer_base as *mut Pixel, info.horizontal_resolution as usize, info.vertical_resolution as usize, (info.pixels_per_scan_line * 4) as usize);
 
     for i in 0..info.horizontal_resolution {
         for j in 0..info.vertical_resolution {
-            frame_buffer.draw_pixel(i as usize, j as usize, Pixel {r: 255, g: 192, b: 203, reserved: 0});
+            frame_buffer.draw_pixel(i as usize, j as usize, Pixel {r: 0, g: 0, b: 0, reserved: 0});
+        }
+    }
+
+    for y in 0..FIXED_HEIGHT {
+        for x in (0..FIXED_WIDTH).rev() {
+            // get the xth bit from the bitmap
+            let bit = (BITMAP_CHAR_A[y] >> x) & 1;
+            if bit == 1 {
+                frame_buffer.draw_pixel(x, y, Pixel {r: 255, g: 255, b: 255, reserved: 0});
+            }
+            else
+            {
+                frame_buffer.draw_pixel(x, y, Pixel {r: 0, g: 0, b: 0, reserved: 0});
+            }
         }
     }
 
