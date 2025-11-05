@@ -2,7 +2,7 @@
 #![no_main]
 
 mod framebuffer;
-mod font;
+mod font_engine;
 
 use core::arch::asm;
 use core::ffi::c_void;
@@ -20,7 +20,7 @@ use framebuffer::Pixel;
 
 use uefi_raw::protocol::console::GraphicsOutputModeInformation;
 
-use font::*;
+use crate::font_engine::font::*;
 
 const SERIAL_PORT: u16 = 0x3F8;
 
@@ -105,15 +105,29 @@ pub extern "C" fn _start(bootinfo_addr: *mut c_void) -> ! {
     }
 
     for y in 0..FIXED_HEIGHT {
+        // for x in (0..FIXED_WIDTH).rev() {
+        // let inv_y = FIXED_HEIGHT - 1 - y;
         for x in (0..FIXED_WIDTH).rev() {
             // get the xth bit from the bitmap
             let bit = (BITMAP_CHAR_A[y] >> x) & 1;
             if bit == 1 {
-                frame_buffer.draw_pixel(x, y, Pixel {r: 255, g: 255, b: 255, reserved: 0});
+                frame_buffer.draw_pixel(x, y, Pixel {r: 55, g: 255, b: 55, reserved: 0});
             }
             else
             {
                 frame_buffer.draw_pixel(x, y, Pixel {r: 0, g: 0, b: 0, reserved: 0});
+            }
+        }
+    }
+
+    let cursor = 8;
+
+    for y in 0..FIXED_HEIGHT {
+        for x in (0..FIXED_WIDTH).rev() {
+            if ((BITMAP_CHAR_B[y] >> x) & 1) == 1 {
+                frame_buffer.draw_pixel(x + cursor, y, Pixel {r: 55, g: 255, b: 55, reserved: 0});
+            } else {
+                frame_buffer.draw_pixel(x + cursor, y, Pixel {r: 0, g: 0, b: 0, reserved: 0});
             }
         }
     }
@@ -123,6 +137,7 @@ pub extern "C" fn _start(bootinfo_addr: *mut c_void) -> ! {
 
 #[panic_handler]
 fn panic(_info: &core::panic::PanicInfo) -> ! {
+    serial_write_string("PANICED!\n");
     loop {
 
     }
