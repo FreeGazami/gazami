@@ -105,10 +105,7 @@ pub extern "C" fn _start(bootinfo_addr: *mut c_void) -> ! {
     }
 
     for y in 0..FIXED_HEIGHT {
-        // for x in (0..FIXED_WIDTH).rev() {
-        // let inv_y = FIXED_HEIGHT - 1 - y;
         for x in (0..FIXED_WIDTH).rev() {
-            // get the xth bit from the bitmap
             let bit = (BITMAP_CHAR_A[y] >> x) & 1;
             if bit == 1 {
                 frame_buffer.draw_pixel(x, y, Pixel {r: 55, g: 255, b: 55, reserved: 0});
