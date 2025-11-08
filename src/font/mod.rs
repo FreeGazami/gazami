@@ -6,7 +6,7 @@ pub const BITMAP_LENGTH: usize = 128;
 
 use crate::framebuffer::Pixel;
 
-pub const BITMAP_CHAR_A: [u8; BITMAP_HEIGHT] = [
+pub const A: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b00111100,
     0b01111110,
@@ -25,7 +25,7 @@ pub const BITMAP_CHAR_A: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const BITMAP_CHAR_B: [u8; BITMAP_HEIGHT] = [
+pub const B: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b00111110,
     0b01111110,
@@ -44,7 +44,7 @@ pub const BITMAP_CHAR_B: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const BITMAP_CHAR_C: [u8; BITMAP_HEIGHT] = [
+pub const C: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b00111100,
     0b01111110,
@@ -60,6 +60,82 @@ pub const BITMAP_CHAR_C: [u8; BITMAP_HEIGHT] = [
     0b01100110,
     0b01111110,
     0b00111100,
+    0b00000000,
+];
+
+pub const D: [u8; BITMAP_HEIGHT] = [
+    0b00000000,
+    0b00111110,
+    0b01110110,
+    0b01100110,
+    0b01100110,
+    0b01100110,
+    0b01100110,
+    0b01100110,
+    0b01100110,
+    0b01100110,
+    0b01100110,
+    0b01100110,
+    0b01100110,
+    0b01110110,
+    0b00111110,
+    0b00000000,
+];
+
+pub const E: [u8; BITMAP_HEIGHT] = [
+    0b00000000,
+    0b01111110,
+    0b01111110,
+    0b00000110,
+    0b00000110,
+    0b00000110,
+    0b00000110,
+    0b01111110,
+    0b01111110,
+    0b00000110,
+    0b00000110,
+    0b00000110,
+    0b00000110,
+    0b01111110,
+    0b01111110,
+    0b00000000,
+];
+
+pub const F: [u8; BITMAP_HEIGHT] = [
+    0b00000000,
+    0b01111110,
+    0b01111110,
+    0b00000110,
+    0b00000110,
+    0b00000110,
+    0b00000110,
+    0b01111110,
+    0b01111110,
+    0b00000110,
+    0b00000110,
+    0b00000110,
+    0b00000110,
+    0b00000110,
+    0b00000110,
+    0b00000000,
+];
+
+pub const G: [u8; BITMAP_HEIGHT] = [
+    0b00000000,
+    0b00111100,
+    0b01111110,
+    0b01100110,
+    0b01100110,
+    0b01100110,
+    0b00000110,
+    0b00000110,
+    0b01110110,
+    0b01110110,
+    0b01000110,
+    0b01000110,
+    0b01000110,
+    0b01111110,
+    0b01111100,
     0b00000000,
 ];
 

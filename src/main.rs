@@ -104,10 +104,20 @@ pub extern "C" fn _start(bootinfo_addr: *mut c_void) -> ! {
 
     // try using new code
     frame_buffer.clear(Pixel {r:0, g: 0, b: 0, rsvd: 0});
-    frame_buffer.write_bitmap(&BITMAP_CHAR_A, None, None);
-    frame_buffer.write_bitmap(&BITMAP_CHAR_A, None, None);
-    frame_buffer.write_bitmap(&BITMAP_CHAR_B, None, None);
-    frame_buffer.write_bitmap(&BITMAP_CHAR_B, None, None);
+    frame_buffer.write_bitmap(&A, None, None);
+    frame_buffer.write_bitmap(&A, None, None);
+    frame_buffer.write_bitmap(&B, None, None);
+    frame_buffer.write_bitmap(&B, None, None);
+    frame_buffer.write_bitmap(&C, None, None);
+    frame_buffer.write_bitmap(&C, None, None);
+    frame_buffer.write_bitmap(&D, None, None);
+    frame_buffer.write_bitmap(&D, None, None);
+    frame_buffer.write_bitmap(&E, None, None);
+    frame_buffer.write_bitmap(&E, None, None);
+    frame_buffer.write_bitmap(&F, None, None);
+    frame_buffer.write_bitmap(&F, None, None);
+    frame_buffer.write_bitmap(&G, None, None);
+    frame_buffer.write_bitmap(&G, None, None);
 
     hlt_loop()
 }
