@@ -2,7 +2,7 @@
 #![no_main]
 
 mod framebuffer;
-mod font_engine;
+mod font;
 
 use core::arch::asm;
 use core::ffi::c_void;
@@ -17,10 +17,9 @@ use uefi_handoff::BootInfo;
 
 use framebuffer::FrameBuffer;
 use framebuffer::Pixel;
+use font::*;
 
 use uefi_raw::protocol::console::GraphicsOutputModeInformation;
-
-use crate::font_engine::font::*;
 
 const SERIAL_PORT: u16 = 0x3F8;
 
@@ -96,38 +95,19 @@ pub extern "C" fn _start(bootinfo_addr: *mut c_void) -> ! {
 
     let info: GraphicsOutputModeInformation = unsafe{(*bootinfo).info};
 
-    let mut frame_buffer: FrameBuffer = FrameBuffer::new(frame_buffer_base as *mut Pixel, info.horizontal_resolution as usize, info.vertical_resolution as usize, (info.pixels_per_scan_line * 4) as usize);
+    let mut frame_buffer: FrameBuffer = FrameBuffer::new(
+        frame_buffer_base as *mut Pixel,
+        info.horizontal_resolution as usize,
+        info.vertical_resolution as usize,
+        (info.pixels_per_scan_line * 4) as usize,
+    );
 
-    for i in 0..info.horizontal_resolution {
-        for j in 0..info.vertical_resolution {
-            frame_buffer.draw_pixel(i as usize, j as usize, Pixel {r: 0, g: 0, b: 0, reserved: 0});
-        }
-    }
-
-    for y in 0..FIXED_HEIGHT {
-        for x in (0..FIXED_WIDTH).rev() {
-            let bit = (BITMAP_CHAR_A[y] >> x) & 1;
-            if bit == 1 {
-                frame_buffer.draw_pixel(x, y, Pixel {r: 55, g: 255, b: 55, reserved: 0});
-            }
-            else
-            {
-                frame_buffer.draw_pixel(x, y, Pixel {r: 0, g: 0, b: 0, reserved: 0});
-            }
-        }
-    }
-
-    let cursor = 8;
-
-    for y in 0..FIXED_HEIGHT {
-        for x in (0..FIXED_WIDTH).rev() {
-            if ((BITMAP_CHAR_B[y] >> x) & 1) == 1 {
-                frame_buffer.draw_pixel(x + cursor, y, Pixel {r: 55, g: 255, b: 55, reserved: 0});
-            } else {
-                frame_buffer.draw_pixel(x + cursor, y, Pixel {r: 0, g: 0, b: 0, reserved: 0});
-            }
-        }
-    }
+    // try using new code
+    frame_buffer.clear(Pixel {r:0, g: 0, b: 0, rsvd: 0});
+    frame_buffer.write_bitmap(&BITMAP_CHAR_A, None, None);
+    frame_buffer.write_bitmap(&BITMAP_CHAR_A, None, None);
+    frame_buffer.write_bitmap(&BITMAP_CHAR_B, None, None);
+    frame_buffer.write_bitmap(&BITMAP_CHAR_B, None, None);
 
     hlt_loop()
 }
