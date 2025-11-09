@@ -141,6 +141,25 @@ pub const G: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
+pub const H: [u8; BITMAP_HEIGHT] = [
+    0b00000000,
+    0b01100110,
+    0b01100110,
+    0b01100110,
+    0b01100110,
+    0b01100110,
+    0b01100110,
+    0b01111110,
+    0b01111110,
+    0b01100110,
+    0b01100110,
+    0b01100110,
+    0b01100110,
+    0b01100110,
+    0b01100110,
+    0b00000000,
+];
+
 #[repr(C)]
 pub struct Character<'a> {
     pub bitmap: &'a [u8; BITMAP_HEIGHT],

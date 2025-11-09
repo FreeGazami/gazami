@@ -116,6 +116,8 @@ pub extern "C" fn _start(bootinfo_addr: *mut c_void) -> ! {
         }
     }
 
+    frame_buffer.write_bitmap(&H, None, None);
+
     hlt_loop()
 }
 
