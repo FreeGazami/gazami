@@ -31,12 +31,16 @@ pub struct FrameBuffer {
     pub stride: usize,
     pub color: Color,
     pub cursor: Cursor,
+    pub char_per_line: usize,
+    pub char_per_col: usize,
 }
 
 impl FrameBuffer {
     pub fn new(buffer_ptr: *mut Pixel, width: usize, height: usize, stride: usize) -> Self {
         let buffer_len = height * stride / mem::size_of::<Pixel>();
         let buffer = unsafe { slice::from_raw_parts_mut(buffer_ptr, buffer_len)};
+        let char_per_line = width / BITMAP_WIDTH;
+        let char_per_col  = height / BITMAP_HEIGHT;
 
         return FrameBuffer {
             buffer,
@@ -45,6 +49,8 @@ impl FrameBuffer {
             stride,
             color: {Color { background:{ Pixel {r: 0, g: 0, b: 0, rsvd: 0}}, foreground:{ Pixel {r: 255, g: 255, b: 255, rsvd: 0} } }},
             cursor:{ Cursor { x: 0, y: 0 } },
+            char_per_line,
+            char_per_col,
         };
     }
 
@@ -63,24 +69,31 @@ impl FrameBuffer {
             None => (self.color.background, self.color.foreground),
         };
 
-        let (cursor_x, cursor_y) = match cursor {
+        let (ref mut cursor_x, ref mut cursor_y) = match cursor {
             Some((x, y)) => (x, y),
             None => (self.cursor.x, self.cursor.y),
         };
 
+        if *cursor_x + BITMAP_WIDTH_M > self.width {
+            *cursor_y += BITMAP_HEIGHT;
+            *cursor_x = 0;
+            self.cursor.x = *cursor_x;
+            self.cursor.y += BITMAP_HEIGHT;
+        }
+
         for y in 0..BITMAP_HEIGHT {
             for x in (0..BITMAP_WIDTH).rev() {
                 if ((bitmap[y] >> x) & 1) == 1 {
-                    self.set_pixel(x + cursor_x, y + cursor_y, foreground);
+                    self.set_pixel(x + *cursor_x, y + *cursor_y, foreground);
                 } else {
-                    self.set_pixel(x + cursor_x, y + cursor_y, background);
+                    self.set_pixel(x + *cursor_x, y + *cursor_y, background);
                 }
             }
         }
 
-        self.cursor.x += BITMAP_WIDTH;
-        // Add logic to handle rows
-        // self.cursor.y += BITMAP_LENGTH;
+        if cursor == None {
+            self.cursor.x += BITMAP_WIDTH;
+        }
     }
 
     pub fn clear(&mut self, color: Pixel) {

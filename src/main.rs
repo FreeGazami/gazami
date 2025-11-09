@@ -17,6 +17,7 @@ use uefi_handoff::BootInfo;
 
 use framebuffer::FrameBuffer;
 use framebuffer::Pixel;
+use framebuffer::Color;
 use font::*;
 
 use uefi_raw::protocol::console::GraphicsOutputModeInformation;
@@ -104,20 +105,16 @@ pub extern "C" fn _start(bootinfo_addr: *mut c_void) -> ! {
 
     // try using new code
     frame_buffer.clear(Pixel {r:0, g: 0, b: 0, rsvd: 0});
-    frame_buffer.write_bitmap(&A, None, None);
-    frame_buffer.write_bitmap(&A, None, None);
-    frame_buffer.write_bitmap(&B, None, None);
-    frame_buffer.write_bitmap(&B, None, None);
-    frame_buffer.write_bitmap(&C, None, None);
-    frame_buffer.write_bitmap(&C, None, None);
-    frame_buffer.write_bitmap(&D, None, None);
-    frame_buffer.write_bitmap(&D, None, None);
-    frame_buffer.write_bitmap(&E, None, None);
-    frame_buffer.write_bitmap(&E, None, None);
-    frame_buffer.write_bitmap(&F, None, None);
-    frame_buffer.write_bitmap(&F, None, None);
-    frame_buffer.write_bitmap(&G, None, None);
-    frame_buffer.write_bitmap(&G, None, None);
+
+    for i in 0..300 {
+        if i % 2 == 1 {
+            let color = Some((Pixel {r:0, g:0, b:0, rsvd: 0}, Pixel {r:255, g:255, b:53, rsvd: 0}));
+            frame_buffer.write_bitmap(&G, color, None);
+        }
+        else {
+            frame_buffer.write_bitmap(&G, None, None);
+        }
+    }
 
     hlt_loop()
 }

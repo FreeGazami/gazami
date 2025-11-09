@@ -1,7 +1,9 @@
 // Glyphs
 
 pub const BITMAP_WIDTH: usize = 8;
+pub const BITMAP_WIDTH_M: usize = BITMAP_WIDTH - 1;
 pub const BITMAP_HEIGHT: usize = 16;
+pub const BITMAP_HEIGHT_M: usize = BITMAP_HEIGHT - 1;
 pub const BITMAP_LENGTH: usize = 128;
 
 use crate::framebuffer::Pixel;
