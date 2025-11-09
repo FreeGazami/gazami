@@ -9,4 +9,5 @@ uefi_handoff = { git = "https://github.com/FreeGazami/uefi_handoff.git", branch 
 
 [build-dependencies]
 serde = { version = "1.0.221", features = ["derive", "std"] }
+serde_json = "1.0"
 toml = "0.9.5"
