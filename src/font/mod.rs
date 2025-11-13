@@ -8,7 +8,7 @@ pub const BITMAP_LENGTH: usize = 128;
 
 use crate::framebuffer::Pixel;
 
-pub const A: [u8; BITMAP_HEIGHT] = [
+pub const BMAP_A: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b00111100,
     0b01111110,
@@ -27,7 +27,7 @@ pub const A: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const B: [u8; BITMAP_HEIGHT] = [
+pub const BMAP_B: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b00111110,
     0b01111110,
@@ -46,7 +46,7 @@ pub const B: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const C: [u8; BITMAP_HEIGHT] = [
+pub const BMAP_C: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b00111100,
     0b01111110,
@@ -65,7 +65,7 @@ pub const C: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const D: [u8; BITMAP_HEIGHT] = [
+pub const BMAP_D: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b00111110,
     0b01110110,
@@ -84,7 +84,7 @@ pub const D: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const E: [u8; BITMAP_HEIGHT] = [
+pub const BMAP_E: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b01111110,
     0b01111110,
@@ -103,7 +103,7 @@ pub const E: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const F: [u8; BITMAP_HEIGHT] = [
+pub const BMAP_F: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b01111110,
     0b01111110,
@@ -122,7 +122,7 @@ pub const F: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const G: [u8; BITMAP_HEIGHT] = [
+pub const BMAP_G: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b00111100,
     0b01111110,
@@ -141,7 +141,7 @@ pub const G: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const H: [u8; BITMAP_HEIGHT] = [
+pub const BMAP_H: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b01100110,
     0b01100110,
@@ -160,7 +160,7 @@ pub const H: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const I: [u8; BITMAP_HEIGHT] = [
+pub const BMAP_I: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b01111110,
     0b01111110,
@@ -179,7 +179,7 @@ pub const I: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const J: [u8; BITMAP_HEIGHT] = [
+pub const BMAP_J: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b01111110,
     0b01111110,
@@ -198,7 +198,7 @@ pub const J: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const K: [u8; BITMAP_HEIGHT] = [
+pub const BMAP_K: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b01100110,
     0b01100110,
@@ -217,7 +217,7 @@ pub const K: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const L: [u8; BITMAP_HEIGHT] = [
+pub const BMAP_L: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b00000110,
     0b00000110,
@@ -236,7 +236,7 @@ pub const L: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const M: [u8; BITMAP_HEIGHT] = [
+pub const BMAP_M: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b01100110,
     0b01100110,
@@ -255,7 +255,7 @@ pub const M: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const N: [u8; BITMAP_HEIGHT] = [
+pub const BMAP_N: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b01000110,
     0b01000110,
@@ -274,7 +274,7 @@ pub const N: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const O: [u8; BITMAP_HEIGHT] = [
+pub const BMAP_O: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b00011000,
     0b00111100,
@@ -293,7 +293,7 @@ pub const O: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const P: [u8; BITMAP_HEIGHT] = [
+pub const BMAP_P: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b00111110,
     0b01111110,
@@ -312,7 +312,7 @@ pub const P: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const Q: [u8; BITMAP_HEIGHT] = [
+pub const BMAP_Q: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b00011000,
     0b00111100,
@@ -331,7 +331,7 @@ pub const Q: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const R: [u8; BITMAP_HEIGHT] = [
+pub const BMAP_R: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b00111110,
     0b01100110,
@@ -350,7 +350,7 @@ pub const R: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const S: [u8; BITMAP_HEIGHT] = [
+pub const BMAP_S: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b00111100,
     0b01111110,
@@ -369,7 +369,7 @@ pub const S: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const T: [u8; BITMAP_HEIGHT] = [
+pub const BMAP_T: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b11111111,
     0b11111111,
@@ -388,7 +388,7 @@ pub const T: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const U: [u8; BITMAP_HEIGHT] = [
+pub const BMAP_U: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b01100110,
     0b01100110,
@@ -407,7 +407,7 @@ pub const U: [u8; BITMAP_HEIGHT] = [
     0b00000000,
 ];
 
-pub const V: [u8; BITMAP_HEIGHT] = [
+pub const BMAP_V: [u8; BITMAP_HEIGHT] = [
     0b00000000,
     0b01100010,
     0b01100010,
@@ -423,6 +423,63 @@ pub const V: [u8; BITMAP_HEIGHT] = [
     0b00011100,
     0b00001100,
     0b00000100,
+    0b00000000,
+];
+
+pub const BMAP_W: [u8; BITMAP_HEIGHT] = [
+    0b11000011,
+    0b11000011,
+    0b11000011,
+    0b11000011,
+    0b11011011,
+    0b11011011,
+    0b11011011,
+    0b11111111,
+    0b11111111,
+    0b11111111,
+    0b11100111,
+    0b11100111,
+    0b11100111,
+    0b11000011,
+    0b11000011,
+    0b00000000,
+];
+
+pub const BMAP_Y: [u8; BITMAP_HEIGHT] = [
+    0b11000011,
+    0b11000011,
+    0b11000011,
+    0b11000011,
+    0b11100111,
+    0b11100111,
+    0b01101110,
+    0b01101110,
+    0b00111100,
+    0b00111100,
+    0b00011000,
+    0b00011000,
+    0b00011000,
+    0b00011000,
+    0b00011000,
+    0b00000000,
+];
+
+pub const BMAP_Z: [u8; BITMAP_HEIGHT] = [
+    0b00000000,
+    0b11111111,
+    0b11111111,
+    0b11100000,
+    0b01110000,
+    0b00111000,
+    0b00011100,
+    0b00001110,
+    0b00000111,
+    0b00000011,
+    0b00000011,
+    0b00000011,
+    0b00000011,
+    0b11111111,
+    0b11111111,
     0b00000000,
 ];
 
