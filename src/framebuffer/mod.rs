@@ -96,6 +96,12 @@ impl FrameBuffer {
         }
     }
 
+    pub fn write_string(&mut self, arg: &str) {
+        for c in arg.chars() {
+            self.write_bitmap(ASCII_TABLE[c as usize], None, None);
+        }
+    }
+
     pub fn clear(&mut self, color: Pixel) {
         for pixel in self.buffer.iter_mut() {
             *pixel = color;
