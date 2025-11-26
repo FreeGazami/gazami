@@ -78,14 +78,12 @@ pub fn print_u64(mut num: u64) {
     serial_write_string(s);
 }
 
-
 #[unsafe(no_mangle)]
 pub extern "C" fn _start(bootinfo_addr: *mut c_void) -> ! {
     let bootinfo: *mut BootInfo = bootinfo_addr as *mut BootInfo;
 
     let runtime_services: *mut RuntimeServices = unsafe{
         (*bootinfo).runtime_services as *mut RuntimeServices
-        // 0xbf5ecb98 as *mut RuntimeServices
     };
 
     let frame_buffer_base: u64 = unsafe{(*bootinfo).frame_buffer_base};
@@ -103,20 +101,11 @@ pub extern "C" fn _start(bootinfo_addr: *mut c_void) -> ! {
         (info.pixels_per_scan_line * 4) as usize,
     );
 
-    // try using new code
     frame_buffer.clear(Pixel {r:0, g: 0, b: 0, rsvd: 0});
 
-    for i in 0..300 {
-        if i % 2 == 1 {
-            let color = Some((Pixel {r:0, g:0, b:0, rsvd: 0}, Pixel {r:255, g:255, b:53, rsvd: 0}));
-            frame_buffer.write_bitmap(&G, color, None);
-        }
-        else {
-            frame_buffer.write_bitmap(&G, None, None);
-        }
-    }
+    let color = Some((Pixel {r:0, g: 0, b: 0, rsvd: 0}, Pixel {r:0, g: 0, b: 0, rsvd: 0}));
 
-    frame_buffer.write_bitmap(&H, None, None);
+    frame_buffer.write_string("Hello World!");
 
     hlt_loop()
 }
