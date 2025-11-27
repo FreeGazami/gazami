@@ -97,8 +97,14 @@ impl FrameBuffer {
     }
 
     pub fn write_string(&mut self, arg: &str) {
-        for c in arg.chars() {
-            self.write_bitmap(ASCII_TABLE[c as usize], None, None);
+        for b in arg.bytes() {
+            if b == b'\n' {
+                self.cursor.y += BITMAP_HEIGHT;
+                self.cursor.x = 0;
+                continue;
+            }
+            let bitmap: &[u8; BITMAP_HEIGHT] = ASCII_TABLE.get(b as usize).unwrap_or(&&BMAP_NOTDEF);
+            self.write_bitmap(bitmap, None, None);
         }
     }
 

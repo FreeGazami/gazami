@@ -105,7 +105,7 @@ pub extern "C" fn _start(bootinfo_addr: *mut c_void) -> ! {
 
     let color = Some((Pixel {r:0, g: 0, b: 0, rsvd: 0}, Pixel {r:0, g: 0, b: 0, rsvd: 0}));
 
-    frame_buffer.write_string("Hello World!");
+    frame_buffer.write_string("[TEST]: runtime panic at line 511\nHello World!");
 
     hlt_loop()
 }
