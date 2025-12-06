@@ -1,6 +1,6 @@
 #![no_std]
 
-use crate::font::*;
+use crate::bmap::*;
 
 use core::{ mem, slice };
 

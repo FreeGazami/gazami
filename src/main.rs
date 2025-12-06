@@ -1,28 +1,25 @@
 #![no_std]
 #![no_main]
 
-mod framebuffer;
-mod font;
+mod video_framebuffer;
+mod bmap;
 
 use core::arch::asm;
 use core::ffi::c_void;
 
 use uefi_raw::table::system::SystemTable;
 use uefi_raw::table::runtime::{RuntimeServices, ResetType};
-use uefi_raw::protocol::console::{SimpleTextOutputProtocol};
+use uefi_raw::protocol::console::{SimpleTextOutputProtocol, GraphicsOutputModeInformation};
 use uefi_raw::Handle;
 use uefi_raw::Status;
 
 use uefi_handoff::BootInfo;
 
-use framebuffer::FrameBuffer;
-use framebuffer::Pixel;
-use framebuffer::Color;
-use font::*;
+use video_framebuffer::{FrameBuffer, Pixel, Color};
 
-use uefi_raw::protocol::console::GraphicsOutputModeInformation;
 
 const SERIAL_PORT: u16 = 0x3F8;
+
 
 /// Writes a single byte to the serial port
 pub fn serial_write_byte(byte: u8) {
