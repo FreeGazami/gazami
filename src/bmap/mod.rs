@@ -1,4 +1,5 @@
-// Glyphs
+/// file: src/bmap/mod.rs
+/// description: bitmaps for ASCII printable characters (code 32 ~ 127)
 
 pub const BITMAP_WIDTH: usize = 8;
 pub const BITMAP_WIDTH_M: usize = BITMAP_WIDTH - 1;
